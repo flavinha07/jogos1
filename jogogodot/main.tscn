@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://b2ihl4ej0nhrx"]
+
+[ext_resource type="PackedScene" uid="uid://d3igth20liq24" path="res://player.tscn" id="1_gv6ep"]
+[ext_resource type="Script" path="res://script/main.gd" id="1_r3qsd"]
+[ext_resource type="PackedScene" uid="uid://bxxux36aptpj0" path="res://inimigo.tscn" id="2_0pvek"]
+
+[sub_resource type="Curve2D" id="Curve2D_togqp"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 480, 0, 0, 0, 0, 0, 480, 720, 0, 0, 0, 0, 0, 720, 0, 0, 0, 0, 0, 0)
+}
+point_count = 5
+
+[node name="main" type="Node2D"]
+script = ExtResource("1_r3qsd")
+bug_scene = ExtResource("2_0pvek")
+
+[node name="Player" parent="." instance=ExtResource("1_gv6ep")]
+position = Vector2(214, 322)
+
+[node name="BugTime" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="ScoreTime" type="Timer" parent="."]
+
+[node name="StartTime" type="Timer" parent="."]
+wait_time = 2.0
+
+[node name="StartPosition" type="Marker2D" parent="."]
+position = Vector2(240, 360)
+
+[node name="BugPath" type="Path2D" parent="."]
+curve = SubResource("Curve2D_togqp")
+
+[node name="BugPathLocation" type="PathFollow2D" parent="BugPath"]
+
+[connection signal="hit" from="Player" to="." method="game_over"]
+[connection signal="timeout" from="BugTime" to="." method="_on_bug_time_timeout"]
+[connection signal="timeout" from="ScoreTime" to="." method="_on_score_time_timeout"]
+[connection signal="timeout" from="StartTime" to="." method="_on_start_time_timeout"]

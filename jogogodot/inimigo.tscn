@@ -1,0 +1,48 @@
+[gd_scene load_steps=6 format=3 uid="uid://bxxux36aptpj0"]
+
+[ext_resource type="Script" path="res://script/inimigo.gd" id="1_aclts"]
+[ext_resource type="Texture2D" uid="uid://cw1vjm1h62f31" path="res://assets/felipe.png" id="2_t5r3i"]
+[ext_resource type="Texture2D" uid="uid://60vdp7rq3e5n" path="res://assets/flavia.png" id="3_7citq"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tgcot"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_t5r3i")
+}],
+"loop": true,
+"name": &"felipe_beetle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_7citq")
+}],
+"loop": true,
+"name": &"flavia_beetle",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_chkxi"]
+radius = 166.667
+height = 386.667
+
+[node name="inimigo" type="RigidBody2D"]
+collision_layer = 2
+gravity_scale = 0.0
+script = ExtResource("1_aclts")
+
+[node name="anim" type="AnimatedSprite2D" parent="."]
+position = Vector2(1, 2)
+scale = Vector2(0.3, 0.3)
+sprite_frames = SubResource("SpriteFrames_tgcot")
+animation = &"flavia_beetle"
+
+[node name="collision" type="CollisionShape2D" parent="."]
+position = Vector2(3, 6)
+scale = Vector2(0.3, 0.3)
+shape = SubResource("CapsuleShape2D_chkxi")
+
+[node name="visible" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="screen_exited" from="visible" to="." method="_on_visible_screen_exited"]
