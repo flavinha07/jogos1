@@ -1,0 +1,111 @@
+[gd_scene load_steps=7 format=3 uid="uid://c5w28hkrjnxsh"]
+
+[ext_resource type="PackedScene" uid="uid://6kaqtvkx2t4c" path="res://hud.tscn" id="1_fjqbq"]
+[ext_resource type="FontFile" uid="uid://cwbt2ugsjq30h" path="res://font/Dihil.ttf" id="2_0vlae"]
+[ext_resource type="Script" path="res://script/hud2.gd" id="2_cujnn"]
+[ext_resource type="StyleBox" uid="uid://bywcbgr4iufo4" path="res://btn_steyle.tres" id="3_lh2if"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_77puf"]
+bg_color = Color(1, 0.460911, 0.979519, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+expand_margin_left = 10.0
+expand_margin_top = 10.0
+expand_margin_right = 20.0
+expand_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aoec2"]
+bg_color = Color(0.828048, 0.000469371, 0.812234, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+expand_margin_left = 10.0
+expand_margin_top = 10.0
+expand_margin_right = 20.0
+expand_margin_bottom = 5.0
+
+[node name="HUD" instance=ExtResource("1_fjqbq")]
+script = ExtResource("2_cujnn")
+
+[node name="Control" parent="." index="0"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" parent="Control" index="0"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -34.0
+offset_top = 81.0
+offset_right = 38.0
+offset_bottom = 147.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.137255, 0.364706, 0.968627, 1)
+text = "o 
+"
+
+[node name="MessageLabel" type="Label" parent="Control" index="1"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -123.0
+offset_top = -216.0
+offset_right = 123.0
+offset_bottom = 166.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.137255, 0.364706, 0.968627, 1)
+theme_override_fonts/font = ExtResource("2_0vlae")
+theme_override_font_sizes/font_size = 64
+text = "jogo
+de
+felipe
+
+flavia"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="StartButton" type="Button" parent="Control" index="2"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -141.0
+offset_top = -164.0
+offset_right = 126.0
+offset_bottom = -100.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.136281, 0.364616, 0.969969, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(0.137255, 0.364706, 0.968627, 1)
+theme_override_fonts/font = ExtResource("2_0vlae")
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = ExtResource("3_lh2if")
+theme_override_styles/hover = SubResource("StyleBoxFlat_77puf")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_aoec2")
+theme_override_styles/focus = ExtResource("3_lh2if")
+text = "start"
+
+[node name="MessageTimer" type="Timer" parent="." index="1"]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="pressed" from="Control/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="timeout" from="MessageTimer" to="." method="_on_message_timer_timeout"]
